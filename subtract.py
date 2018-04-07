@@ -1,31 +1,34 @@
-def subtract(L1, L2):
+def subtract(a, b):
     """
-    Input: 2 lists in reverse order
-    Output: 1 list with subtraction
-
-    The function assumes L1 - L2
-    Example usage:
-    # L1 = 34580293458
-    # L2 = 45023475
-    # L1, L2 = create_reverse_lists(L1, L2)
-    # L1, L2 = initLists(L1, L2)
-    #
-    # L = subtract(L1, L2)
-    #
-    # printInorder(L)
+    :param a: (list)
+    :param b: (list)
+    :return: c(list) - (a+b)
     """
-    a = L1
-    b = L2
+    if(len(a) == 0):
+        return []
+    c = []
 
-    minLen = min(len(L1), len(L2))
+    if (len(a) > len(b)):
+        b = b + [0] * (len(a) - len(b))
+    if (len(b) > len(a)):
+        a = a + [0] * (len(b) - len(a))
 
-    L = []
-    for i in range(minLen):
-        m = a[i] - b[i]
-        if m < 0:
+    #print(a)
+    #print(b)
+    for i in range(len(a)-1):
+        if a[i] >= b[i]:
+            value = a[i] - b[i]
+        else:
             a[i+1] = a[i+1] - 1
-            a[i] += 10
-            m = a[i] - b[i]
-        L.append(m)
+            value = (a[i] + 10) - b[i]
+        c.append(value)
 
-    return L
+    value = a[len(a)-1] - b[len(b)-1]
+    c.append(value)
+    if(len(c)) != 1:
+        for i in range(len(c)):
+            if(c[len(c)-1]) == 0:
+                c = c[:len(c)-1]
+            else:
+                break
+    return c
